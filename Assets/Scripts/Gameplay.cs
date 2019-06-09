@@ -10,11 +10,24 @@ public class Gameplay : MonoBehaviour {
     public string CircleTag = "circle";
     public string CrossTag = "cross";
     public string DrawTag = "Draw";
-        public Text FinishText;
+    public Text FinishText;
 
     int TurnCount = 0;
     int CircleTurn = 0;
+
+    int[] CornerIndexes = { 0, 2, 6, 8 };
+    int[] SideMidIndexes = { 1, 3, 5, 7 };
+
     string WinnerTag = null;
+    string TLTag = "zero";
+    string TMTag = "one";
+    string TRTag = "two";
+    string CLTag = "three";
+    string CMTag = "four";
+    string CRTag = "five";
+    string BLTag = "six";
+    string BMTag = "seven";
+    string BRTag = "eight";
 
     public void SpawnCross(GameObject obj)
     {
@@ -138,6 +151,26 @@ public class Gameplay : MonoBehaviour {
         {
             FinishText.text = "Draw!";
         }
+    }
+
+    public void GoThroughArray(GameObject FirstTurnSelection)
+    {
+        if (CircleTurn == 1)
+        {
+            if(Cells[4].tag == CMTag)
+            {
+                FirstTurnSelection = Cells[4];
+            }
+            else
+            {
+                FirstTurnSelection = Cells[CornerIndexes[Random.Range(0, CornerIndexes.Length-1)]];
+            }
+        }
+    }
+
+    public void CriticalLossSavingMove(GameObject CriticalCell)
+    {
+        
     }
 
     //public void BotPlay(GameObject BotCell)
